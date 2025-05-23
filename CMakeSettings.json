@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "N-Gage",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "-DLIBXML2_LIBRARY=${env.NGAGESDK}/sdk/extras/lib/libxml2.lib -DLIBXML2_INCLUDE_DIR=${env.NGAGESDK}/sdk/extras/include/libxml -DCMAKE_PREFIX_PATH=${env.NGAGESDK}/sdk/extras/lib/cmake -DWANT_ZLIB=OFF",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.NGAGESDK}/cmake/ngage-toolchain.cmake",
+          "type": "FILEPATH"
+        }
+      ]
+    }
+  ]
+}

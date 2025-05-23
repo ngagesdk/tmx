@@ -140,6 +140,21 @@ void  free_hashtable(void *hashtable, hashtable_entry_deallocator deallocator);
 #define snprintf _snprintf
 #endif
 
+#if defined(__NGAGE__)
+#include <stdarg.h>
+#include <stdio.h>
+int tmx_snprintf(char *str, size_t size, const char *format, ...) {
+    int ret;
+    va_list args;
+    va_start(args, format);
+    ret = _vsnprintf(str, size, format, args);
+    if (size > 0) str[size - 1] = '\0';
+    va_end(args);
+    return ret;
+}
+#define snprintf tmx_snprintf
+#endif
+
 extern char _tmx_custom_msg[256];
 #define tmx_err(code, ...) snprintf(_tmx_custom_msg, 256, __VA_ARGS__); tmx_errno = code
 
